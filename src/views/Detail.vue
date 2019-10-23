@@ -1,18 +1,18 @@
 <template>
   <div class="container">
-    <h2 class="center">Создание задачи</h2>
+    <h2 class="center">Редактирование задачи</h2>
     <hr />
-    <form class="col s12 m12 form" @submit.prevent="createTask">
+    <form class="col s12 m12 form" @submit.prevent="updateTask">
       <div class="row">
         <div class="input-field col s10 m8">
           <i class="material-icons prefix">title</i>
           <input class="validate" type="text" id="first_name" required v-model.trim="title" />
           <label for="first_name">Название задачи</label>
         </div>
-        <div class="input-field col s10 m8 textarea">
+        <div class="input-field col s10 m8 textarea ">
           <i class="material-icons prefix">description</i>
           <textarea
-            class="materialize-textarea"
+            class="materialize-textarea detailtextarea"
             type="text"
             id="textarea1"
             placeholder="Подробнее..."
@@ -27,7 +27,8 @@
           <input class="datepicker center" type="text" ref="picker" />
         </div>
         <div class="input-field col s10 m8">
-          <button class="btn right waves-effect">Создать задачу</button>
+          <button class="btn left waves-effect" type="submit">Обновить задачу</button>
+          <button class="btn right waves-effect green" @click="completeTask" type="button">Выполнить</button>
         </div>
       </div>
     </form>
@@ -41,7 +42,7 @@ export default {
   name: "createTask",
 
   metaInfo: {
-    title: `Создание задачи | ${process.env.VUE_APP_TITLE}`
+    title: `Редактирование задачи | ${process.env.VUE_APP_TITLE}`
   },
 
   data() {
@@ -53,13 +54,22 @@ export default {
     };
   },
 
+  computed: {
+    task() {
+      return this.$store.getters.taskById(+this.$route.params.id);
+    }
+  },
+
   mounted() {
+    this.title = this.task.title;
+    this.description = this.task.description;
     this.tags = M.Chips.init(this.$refs.chips, {
+      data: this.task.tags,
       placeholder: "Тэги"
     }),
       (this.date = M.Datepicker.init(this.$refs.picker, {
         format: "dd.mm.yyyy",
-        defaultDate: new Date(),
+        defaultDate: new Date(this.task.date),
         setDefaultDate: true,
         i18n: {
           months: localizePicker.months,
@@ -82,17 +92,21 @@ export default {
   },
 
   methods: {
-    createTask() {
+    updateTask() {
       const task = {
-        id: Date.now(),
+        id: this.task.id,
         title: this.title,
         description: this.description,
-        status: 'active',
         date: this.date.date,
         tags: this.tags.chipsData
       }
 
-      this.$store.commit('createTask', task);
+      this.$store.commit('updateTask', task);
+      this.$router.push('/');
+    },
+
+    completeTask() {
+      this.$store.commit('completeTask', this.task.id);
       this.$router.push('/');
     }
   }

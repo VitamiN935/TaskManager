@@ -16,6 +16,12 @@ const routes = [
     meta: {layout: 'Main'},
     component: () => import('@/views/CreateTask')
   },
+  {
+    path: '/task/:id',
+    name: 'detailTask',
+    meta: {layout: 'Main'},
+    component: () => import('@/views/Detail')
+  }
 ]
 
 const router = new VueRouter({
