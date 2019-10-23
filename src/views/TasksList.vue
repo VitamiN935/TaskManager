@@ -17,28 +17,35 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>title</td>
-            <td>descriprion</td>
-            <td>12.32.43</td>
-            <td>vue</td>
-            <td>
-              <span class="white-text badge green">active</span>
-            </td>
-            <td>
-              <button class="btn btn-sm waves-effect">
-                <i class="tiny material-icons">input</i>
-              </button>
-            </td>
-            <td>
-              <button class="btn btn-sm red waves-effect">
-                <i class="tiny material-icons">remove_circle</i>
-              </button>
-            </td>
-          </tr>
+          <Task 
+          v-for="(task,idx) of tasks"
+          :key="task.id"
+          :task='task'
+          :idx='+idx'
+          />
         </tbody>
       </table>
     </div>
   </div>
 </template>
+
+<script>
+import Task from '@/components/Task'
+import {mapGetters} from 'vuex'
+
+export default {
+  name: 'taskslist',
+
+  metaInfo: {
+    title: `Список задач | ${process.env.VUE_APP_TITLE}`
+  },
+
+  components: {
+    Task
+  },
+
+  computed: {
+    ...mapGetters(['tasks'])
+  },
+}
+</script>
