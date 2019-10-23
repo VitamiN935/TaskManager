@@ -1,0 +1,32 @@
+#app {
+  min-height: 100vh;
+  position: relative;
+
+  footer {
+    position: relative;
+    bottom: 0px !important;
+    top: 100%;
+    left: 0;
+  }
+}
+
+nav {
+  padding: 0 20px;
+}
+
+.input-field {
+  margin: 20px auto 40px;
+  float: none !important;
+}
+
+.form {
+  margin-top: 40px;
+}
+
+.textarea {
+  min-height: 100px !important;
+}
+
+.wrapper {
+  min-height: 80.4vh;
+}

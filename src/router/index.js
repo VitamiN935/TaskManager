@@ -4,7 +4,18 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  
+  {
+    path: '/',
+    name: 'home-list',
+    meta: {layout: 'Main'},
+    component: () => import('@/views/TasksList')
+  },
+  {
+    path: '/createTask',
+    name: 'createTask',
+    meta: {layout: 'Main'},
+    component: () => import('@/views/CreateTask')
+  },
 ]
 
 const router = new VueRouter({
