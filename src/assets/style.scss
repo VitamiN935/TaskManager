@@ -30,3 +30,10 @@ nav {
 .wrapper {
   min-height: 80.4vh;
 }
+
+.description {
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

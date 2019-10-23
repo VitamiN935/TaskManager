@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import localizePicker from "@/localize/localizePicker";
+import localizePicker from '@/localize/localizePicker'
 
 export default {
   name: "createTask",
@@ -54,9 +54,9 @@ export default {
   },
 
   mounted() {
-    (this.tags = M.Chips.init(this.$refs.chips, {
+    this.tags = M.Chips.init(this.$refs.chips, {
       placeholder: "Тэги"
-    })),
+    }),
       (this.date = M.Datepicker.init(this.$refs.picker, {
         format: "dd.mm.yyyy",
         defaultDate: new Date(),
@@ -67,8 +67,8 @@ export default {
           weekdays: localizePicker.weekdays,
           weekdaysShort: localizePicker.weekdaysShort,
           weekdaysAbbrev: localizePicker.weekdaysAbbrev,
-          cancel: "Отмена"
-        }
+          cancel: 'Отмена'
+        } 
       }));
 
     setTimeout(() => {
@@ -87,13 +87,13 @@ export default {
         id: Date.now(),
         title: this.title,
         description: this.description,
-        status: "active",
+        status: 'active',
         date: this.date.date,
         tags: this.tags.chipsData
-      };
+      }
 
-      this.$store.commit("createTask", task);
-      this.$router.push("/");
+      this.$store.commit('createTask', task);
+      this.$router.push('/');
     }
   }
 };
