@@ -102,11 +102,13 @@ export default {
       }
 
       this.$store.commit('updateTask', task);
+      this.$message('Задача обновлена');
       this.$router.push('/');
     },
 
     completeTask() {
       this.$store.commit('completeTask', this.task.id);
+      this.$message('Задача выполнена');
       this.$router.push('/');
     }
   }

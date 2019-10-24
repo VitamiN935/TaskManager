@@ -68,6 +68,7 @@ export default {
   methods: {
     deleteTask() {
       this.$store.commit("deleteTask", this.task.id);
+      this.$message('Задача удалена');
     }
   }
 };
