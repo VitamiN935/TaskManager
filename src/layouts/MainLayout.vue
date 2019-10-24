@@ -15,7 +15,9 @@
     </nav>
 
     <section class="wrapper row">
-      <router-view />
+      <transition name="component">
+        <router-view />
+      </transition>
     </section>
 
     <footer class="page-footer teal lighten-1">

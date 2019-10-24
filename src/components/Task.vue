@@ -4,7 +4,7 @@
     <td>{{task.title}}</td>
     <td class="description">{{task.description}}</td>
     <td>{{task.date | date}}</td>
-    <td>{{task.tags}}</td>
+    <td>{{tags}}</td>
     <td>
       <span class="white-text badge" :class="coloredStatus">{{task.status | filterStatus}}</span>
     </td>
@@ -14,12 +14,13 @@
       class="btn btn-sm waves-effect" 
       :to="'task/' + task.id" 
       :disabled='task.status === "complete"'
+      v-tooltip='"Открыть"'
       >
         <i class="tiny material-icons">input</i>
       </router-link>
     </td>
     <td>
-      <button class="btn btn-sm red waves-effect" @click="deleteTask">
+      <button class="btn btn-sm red waves-effect" @click="deleteTask" v-tooltip='"Удалить"'>
         <i class="tiny material-icons">remove_circle</i>
       </button>
     </td>
@@ -48,7 +49,7 @@ export default {
     },
 
     tags() {
-      
+      return this.task.tags.map(item => item.tag).join(',');
     }
   },
 
@@ -68,6 +69,7 @@ export default {
   methods: {
     deleteTask() {
       this.$store.commit("deleteTask", this.task.id);
+      this.$message('Задача удалена');
     }
   }
 };
