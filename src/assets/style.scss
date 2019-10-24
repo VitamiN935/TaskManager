@@ -41,3 +41,36 @@ nav {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+@keyframes moveInUp {
+  0% {
+    transform: translateX(0);
+    position: absolute;
+  }
+  100% {
+    position: absolute;
+    transform: translateX(400px);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translateX(-500px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.component-enter-active {
+  animation: fadeIn .4s ease-in;
+}
+
+.component-leave-active {
+  animation: moveInUp .1s ease-in;
+}

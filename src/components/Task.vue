@@ -4,7 +4,7 @@
     <td>{{task.title}}</td>
     <td class="description">{{task.description}}</td>
     <td>{{task.date | date}}</td>
-    <td>{{task.tags}}</td>
+    <td>{{tags}}</td>
     <td>
       <span class="white-text badge" :class="coloredStatus">{{task.status | filterStatus}}</span>
     </td>
@@ -48,7 +48,7 @@ export default {
     },
 
     tags() {
-      
+      return this.task.tags.map(item => item.tag).join(',');
     }
   },
 
