@@ -93,6 +93,7 @@ export default {
       };
 
       this.$store.commit("createTask", task);
+      this.$message('Задача создана');
       this.$router.push("/");
     }
   }

@@ -25,12 +25,20 @@
           />
         </tbody>
       </table>
+      <Pagination 
+        :page-count="countPage"
+        :click-handler="changePageHandler"
+        :prev-text="'Назад'"
+        :next-text="'Вперед'"
+        :container-class="'pagination'"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import Task from '@/components/Task'
+import PaginationMixin from '@/mixins/pagination.mixin'
 import {mapGetters} from 'vuex'
 
 export default {
@@ -44,8 +52,14 @@ export default {
     Task
   },
 
+  mixins: [PaginationMixin],
+
   computed: {
     ...mapGetters(['tasks'])
+  },
+
+  mounted() {
+    this.setupPagination(this.tasks)
   },
 }
 </script>
